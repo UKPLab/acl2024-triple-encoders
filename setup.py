@@ -8,10 +8,9 @@ with open("README.md", mode="r", encoding="utf-8") as readme_file:
 setup(
     name="triple-encoders",
     version="0.0.1",
-    # anynonmous for peer review
-    #author="",
-    #author_email="",
-    #download_url="",
+    author="Justus-Jonas Erker",
+    author_email="justus-jonas.erker@tu-darmstadt.de",
+    download_url="https://github.com/UKPLab/arxiv2024-triple-encoders",
     description="Distributed Sentence Transformer Representations with Triple Encoders ",
     long_description=readme,
     long_description_content_type="text/markdown",
@@ -19,8 +18,9 @@ setup(
     packages=find_packages(),
     python_requires=">=3.8.0",
     install_requires=[
-        'datasets==2.13.1',
-        'transformers>=2.0.0'
+        'datasets==2.17.0',
+        'transformers==4.34.1',
+        'sentence-transformers==2.2.2',
         'torch==2.0.1',
         'numpy==1.21.5',
         'pandas==1.4.4',

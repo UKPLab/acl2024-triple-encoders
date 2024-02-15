@@ -185,7 +185,7 @@ If you use triple-encoders in your research, please cite the following paper:
 }
 ```
 # Contact
-Contact person: Justus-Jonas Erker, justus-jonas.erker@tu-darmstadt
+Contact person: Justus-Jonas Erker, justus-jonas.erker@tu-darmstadt.de
 
 https://www.ukp.tu-darmstadt.de/
 
