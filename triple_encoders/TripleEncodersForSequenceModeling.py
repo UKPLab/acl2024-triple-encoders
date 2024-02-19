@@ -381,7 +381,7 @@ class TripleEncodersForSequenceModeling(TripleEncoders):
         This method computes the sequence model for a batch of context embeddings
         :param context_embeddings_batch: a batch of context embeddings
         :param true_candidates_id: a list of true candidates id for each dialogue to compute the rank (will be used if evaluate is True)
-        :param batch_size: the batch size for the bmm across number of dialogues in parallel in the evaluation
+        :param batch_size: the batch size for the bmm across number of dialogues in parallel in the evaluator
         :param evaluate: if True, the ranks will be computed and returned, otherwise the bmm_result will be returned
         :return:
         """
@@ -450,7 +450,7 @@ class TripleEncodersForSequenceModeling(TripleEncoders):
         :param dialogues: List of dialogues. Each dialogue is a list of utterances.
         :param history_lengths: List of history lengths to evaluate.
         :param last_k_rows: if set, only the last k rows of the context
-        :param batch_size: Batch size for bmm across number of dialogues in parallel in the evaluation.
+        :param batch_size: Batch size for bmm across number of dialogues in parallel in the evaluator.
         """
         batch_size = min(batch_size, len(dialogues))
 

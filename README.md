@@ -1,7 +1,7 @@
 <!--- BADGES: START, copied from sentence transformers, will be replaced with the actual once (removed for anonymity)--->
-[![GitHub - License](https://img.shields.io/github/license/UKPLab/sentence-transformers?logo=github&style=flat&color=green)][#github-license]
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/sentence-transformers?logo=pypi&style=flat&color=blue)][#pypi-package]
-[![PyPI - Package Version](https://img.shields.io/pypi/v/ImaginaryNLP?logo=pypi&style=flat&color=orange)][#pypi-package]
+[![GitHub - License](https://img.shields.io/github/license/UKPLab/arxiv2024-triple-encoders?logo=github&style=flat&color=green)][#github-license]
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/triple-encoders?logo=pypi&style=flat&color=blue)][#pypi-package]
+[![PyPI - Package Version](https://img.shields.io/pypi/v/triple-encoders?logo=pypi&style=flat&color=orange)][#pypi-package]
 
 
 [#github-license]: https://github.com/
@@ -34,10 +34,11 @@ Representations are encoded **separately** and the contextualization is **weight
 
 
 ## Installation
-
+You can install `triple-encoders` via pip:
 ```bash
-!python -m pip install triple-encoders
+pip install triple-encoders
 ``` 
+Note that `triple-encoders` requires Python 3.6 or higher.
 
 # Getting Started
 
@@ -59,7 +60,7 @@ model = TripleEncodersForConversationalSequenceModeling(triple_path)
 ### Inference
 
 ```python
-# load candidates
+# load candidates for response selection 
 candidates = ['I am doing great too!','Where did you go?', 'ACL is an interesting conference']
 
 # load candidates and store index
@@ -86,13 +87,13 @@ response
 #(['I am doing great too!','Where did you go?', 'ACL is an interesting conference'],
 # tensor([0.4944, 0.2392, 0.0483]))
 ```
-**Speed:** \
-Time to load candidates: 0:00:00.031815 seconds \
-Time to contextualize sequence: 0:00:00.018078 seconds \
-Time to model sequence: 0:00:00.000256 seconds \
-Time to contextualize new utterance: 0:00:00.015858 seconds \
-Time to model new utterance: 0:00:00.000213 seconds \
-Time to retrieve candidates: 0:00:00.000093 seconds 
+**Speed:** 
+- Time to load candidates: 31.815 ms
+- Time to contextualize sequence: 18.078 ms
+- Time to model sequence: 0.256 ms
+- Time to contextualize new utterance: 15.858 ms
+- Time to model new utterance: 0.213 ms
+- Time to retrieve candidates: 0.093 ms
 
 ### Evaluation
 ```python
@@ -147,9 +148,9 @@ df = model.evaluate_stp_dataset(test)
 
 
 # Training Triple Encoders
-Triple Encoders are build upon Sentence Transformers. At this point, our  loss function and evaluator are not yet integrated into the Sentence Transformers library. 
-After installing Sentence Transformers, you can add the files in  `sentence-transformers` to the respective directories in the sentence-transformers library. 
-This will allow you to train your own triple encoders with Contextualized Curved Contrastive Learning (C3L) loss and Triple Similarity Evaluator.
+You can train your own triple encoders with Contextualized Curved Contrastive Learning (C3L) using our trainer. 
+The hyperparameters that we used for training are the default parameters in the `trainer.py` file. 
+Note that we pre-trained our best model with Curved Contrastive Learning (CCL) (from [imaginaryNLP](https://github.com/Justus-Jonas/imaginaryNLP)) before training with C3L.
 
 ```python
 from triple_encoders.trainer import TripleEncoderTrainer
@@ -160,7 +161,7 @@ dataset = load_dataset("daily_dialog")
 trainer = TripleEncoderTrainer(base_model_name_or_path=,
                                batch_size=48,
                                observation_window=5,
-                               speaker_token=True,
+                               speaker_token=True, # used for conversational sequence modeling
                                num_epochs=3,
                                warmup_steps=10000)
 

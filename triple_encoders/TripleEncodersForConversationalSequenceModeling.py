@@ -159,7 +159,7 @@ class TripleEncodersForConversationalSequenceModeling(TripleEncodersForSequenceM
         :param history_lengths: List of history lengths to evaluate.
         :param last_k_rows: if set, only the last k rows of the context (emerging triangle of states in triple encoders) will be used
         e.g. k_last_rows takes the last k utterances in the [B2] space and contextualize them with the entire [B1] space
-        :param batch_size: Batch size for bmm across number of dialogues in parallel in the evaluation.
+        :param batch_size: Batch size for bmm across number of dialogues in parallel in the evaluator.
         """
         batch_size = min(batch_size, len(dialogues))
 

@@ -6,8 +6,9 @@ import random
 from typing import List, Callable, Dict, Type
 
 import transformers
-from sentence_transformers import InputExample, losses, models, SentenceTransformer
-from sentence_transformers.evaluation import EmbeddingsTripleSimilarityEvaluator
+from sentence_transformers import InputExample, models, SentenceTransformer, losses
+from triple_encoders.evaluator import EmbeddingsTripleSimilarityEvaluator
+from triple_encoders.losses import CosineSimilarityTripleEncoderLoss
 from torch.optim import Optimizer
 from torch.utils.data import DataLoader
 from torch.utils.data.dataloader import default_collate
@@ -62,7 +63,7 @@ class TripleEncoderTrainer:
         Generate datasets for Contextual Curved Contrastive Learning (C3L) objective and NLI objective
         :param train_dataset: dialog dataset for training
         :param validation_dataset: dialog dataset for validation
-        :param evaluation_dataset: dialog dataset for evaluation
+        :param evaluation_dataset: dialog dataset for evaluator
         :param mixed_with_nli: if True, mix the Curved Learning objective with NLI objective
         :return:
         """
@@ -80,7 +81,7 @@ class TripleEncoderTrainer:
         logger.info("Generated {} validation Inputs".format(len(self.dialog_validation_dataset)))
 
         self.dialog_evaluation_dataset = self._generate_C3L_data(evaluation_dataset)
-        logger.info("Generated {} evaluation Inputs".format(len(self.dialog_evaluation_dataset)))
+        logger.info("Generated {} evaluator Inputs".format(len(self.dialog_evaluation_dataset)))
 
         logger.info("Completed generating datasets for Contextualized Curved Learning objective")
 
@@ -259,11 +260,11 @@ class TripleEncoderTrainer:
         :param optimizer_params: Optimizer parameters
         :param weight_decay: Weight decay for model parameters
         :param evaluation_steps: If > 0, evaluate the model using evaluator after each number of training steps
-        :param output_path: Storage path for the model and evaluation files
+        :param output_path: Storage path for the model and evaluator files
         :param save_best_model: If true, the best model (according to evaluator) is stored at output_path
         :param max_grad_norm: Used for gradient normalization.
         :param use_amp: Use Automatic Mixed Precision (AMP). Only for Pytorch >= 1.6.0
-        :param callback: Callback function that is invoked after each evaluation.
+        :param callback: Callback function that is invoked after each evaluator.
                 It must accept the following three parameters in this order:
                 `score`, `epoch`, `steps`
         :param show_progress_bar: If True, output a tqdm progress bar
@@ -283,7 +284,7 @@ class TripleEncoderTrainer:
                                                collate_fn=lambda x: tuple(
                                                    x_.to('cuda') for x_ in default_collate(x)))
 
-        train_loss_dialogue = losses.CosineSimilarityTripleLoss(model=self.model)
+        train_loss_dialogue = CosineSimilarityTripleEncoderLoss(model=self.model)
 
         train_objectives = [(train_dataloader_dialogue, train_loss_dialogue)]
 
