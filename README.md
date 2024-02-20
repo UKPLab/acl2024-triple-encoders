@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-    🤗 <a href="anonymous" target="_blank">Models</a> | 📊 <a href="anonymous" target="_blank">Datasets</a> | 📃 <a href="anonymous" target="_blank">Paper</a>
+    🤗 <a href="https://huggingface.co/UKPLab/triple-encoders-dailydialog" target="_blank">Models</a>  | 📃 <a href="https://arxiv.org/pdf/2402.12332.pdf" target="_blank">Paper</a>
 </p>
 
 `triple-encoders` is a library for contextualizing distributed [Sentence Transformers](https://sbert.net/) representations. 
@@ -51,7 +51,8 @@ We provide an example of how to use triple-encoders for conversational sequence 
 ```python
 from triple_encoders.TripleEncodersForConversationalSequenceModeling import TripleEncodersForConversationalSequenceModeling
 
-triple_path = ''
+# 🤗 model
+triple_path = 'UKPLab/triple-encoders-dailydialog'
 
 # load model
 model = TripleEncodersForConversationalSequenceModeling(triple_path)
@@ -177,12 +178,13 @@ trainer.train("output/path/to/save/model")
 ## Citation
 If you use triple-encoders in your research, please cite the following paper:
 ```
-% todo
-@article{anonymous,
-  title={Triple Encoders: Represenations That Fire Together, Wire Together},
-  author={Justus-Jonas Erker, Florian Mai, Nils Reimers, Gerasimos Spanakis, Iryna Gurevych},
-  journal={axiv},
-  year={2024}
+@misc{erker2024tripleencoders,
+      title={Triple-Encoders: Representations That Fire Together, Wire Together}, 
+      author={Justus-Jonas Erker and Florian Mai and Nils Reimers and Gerasimos Spanakis and Iryna Gurevych},
+      year={2024},
+      eprint={2402.12332},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
 }
 ```
 # Contact
