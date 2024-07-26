@@ -1,7 +1,7 @@
 import torch
 from torch import nn, Tensor
 from typing import Iterable, Dict
-from ..SentenceTransformer import SentenceTransformer
+from sentence_transformers.SentenceTransformer import SentenceTransformer
 
 
 class CosineSimilarityTripleEncoderLoss(nn.Module):
