@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-    🤗 <a href="https://huggingface.co/UKPLab/triple-encoders-dailydialog" target="_blank">Models</a>  | 📃 <a href="https://arxiv.org/pdf/2402.12332.pdf" target="_blank">Paper</a>
+    🤗 <a href="https://huggingface.co/UKPLab/triple-encoders-dailydialog" target="_blank">Models</a>  | 📃 <a href="https://aclanthology.org/2024.acl-long.290/" target="_blank">Paper</a>
 </p>
 
 `triple-encoders` is a library for contextualizing distributed [Sentence Transformers](https://sbert.net/) representations. 
@@ -178,14 +178,26 @@ trainer.train("output/path/to/save/model")
 ## Citation
 If you use triple-encoders in your research, please cite the following paper:
 ```
-@misc{erker2024tripleencoders,
-      title={Triple-Encoders: Representations That Fire Together, Wire Together}, 
-      author={Justus-Jonas Erker and Florian Mai and Nils Reimers and Gerasimos Spanakis and Iryna Gurevych},
-      year={2024},
-      eprint={2402.12332},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL}
+@inproceedings{erker-etal-2024-triple,
+    title = "Triple-Encoders: Representations That Fire Together, Wire Together",
+    author = "Erker, Justus-Jonas  and
+      Mai, Florian  and
+      Reimers, Nils  and
+      Spanakis, Gerasimos  and
+      Gurevych, Iryna",
+    editor = "Ku, Lun-Wei  and
+      Martins, Andre  and
+      Srikumar, Vivek",
+    booktitle = "Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+    month = aug,
+    year = "2024",
+    address = "Bangkok, Thailand",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2024.acl-long.290",
+    pages = "5317--5332",
+    abstract = "Search-based dialog models typically re-encode the dialog history at every turn, incurring high cost.Curved Contrastive Learning, a representation learning method that encodes relative distances between utterances into the embedding space via a bi-encoder, has recently shown promising results for dialog modeling at far superior efficiency.While high efficiency is achieved through independently encoding utterances, this ignores the importance of contextualization. To overcome this issue, this study introduces triple-encoders, which efficiently compute distributed utterance mixtures from these independently encoded utterances through a novel hebbian inspired co-occurrence learning objective in a self-organizing manner, without using any weights, i.e., merely through local interactions. Empirically, we find that triple-encoders lead to a substantial improvement over bi-encoders, and even to better zero-shot generalization than single-vector representation models without requiring re-encoding. Our code (https://github.com/UKPLab/acl2024-triple-encoders) and model (https://huggingface.co/UKPLab/triple-encoders-dailydialog) are publicly available.",
 }
+
 ```
 # Contact
 Contact person: Justus-Jonas Erker, justus-jonas.erker@tu-darmstadt.de
